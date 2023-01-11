@@ -1,0 +1,27 @@
+<div class="row mt-3 g-3">
+
+  <div class="col-12" *ngIf="profesores.length === 0">
+    <h3 class="text-center">No hay profesores con los parámetros indicados.</h3>
+  </div>
+
+  <div class="col-12 col-md-6 col-lg-4 col-xl-3 d-flex justify-content-center" *ngFor="let profesor of profesores">
+
+    <div class="card card-profesor">
+      <h5 class="card-header">{{ profesor.nombreCompleto}}</h5>
+
+      <div class="mx-auto pt-3">
+        <img with="100px" class="img-profesor rounded rounded-circle" [src]="getUserImage(profesor)" [alt]="profesor.nombreCompleto">
+      </div>
+
+      <div class="card-body">
+        <h5 class="card-title">{{ profesor.nombreRama }}</h5>
+        <p class="card-text">{{ profesor.descripcion }}</p>
+        <p class="card-text mb-0">Precio/Hora: {{ profesor.precioHora | formatoMedidas: '€' }}</p>
+        <p class="card-text mb-0">Experiencia: {{ profesor.experiencia }}</p>
+        <p class="card-text">Distancia: {{ profesor.distancia | formatoMedidas: 'Kms' }}</p>
+        <a *ngIf="token" [href]="'TeacherApp/info-profesor/'+profesor.id" class="btn btn-primary" target="_blank">Ver más</a>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,17 @@
+<app-barra-profesor></app-barra-profesor>
+
+<section class="container2">
+    
+    <hr class="bg-light">
+    
+    <div class="row">
+        
+        <article class="col-12 col-nd-4 col-lg-3 mb-4" *ngFor="let alumn of arralumnos">
+            
+            <app-carta-alumno [Alumno]="alumn"></app-carta-alumno>
+        
+        </article>
+    
+    </div>
+
+</section>

@@ -1,0 +1,35 @@
+<div class="card text-center h-100">
+    
+    <img [src]="imagen" class="container rounded rounded-circle mt-2 imagen"  [alt]="Alumno.nombreCompleto">
+    
+    <div class="card-body">
+        
+        <h5 class="card-title">{{Alumno.nombreCompleto}}</h5>
+        
+        <p>{{Alumno.email}}</p>
+        
+        <div class="form-group mt-3">
+            <label for="opinion">Opinion</label>
+            <textarea class="form-control" id="opinion" rows="3" disabled>{{Alumno.comentario}}</textarea>
+        </div>
+        
+        <div class="form-group mt-3">
+            <label for="puntuacion">Puntuacion</label>
+            <input type="number" class="form-control" id="puntuacion" value={{Alumno.puntuacion}} disabled>
+        </div>
+        
+    </div>
+    
+    <div *ngIf="!aceptado">
+        
+        <div class="card-footer">
+            <small class="text-muted">
+                <button type="submit" class="btn btn-primary mt-3 ms-3 me-3 mb-3" (click)="aceptar_alumno()">Aceptar</button>
+            </small>
+        </div>
+
+    </div>
+
+</div>
+
+<div></div>

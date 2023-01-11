@@ -1,0 +1,12 @@
+.imagen{
+    width: 40%;
+    border-radius: 50% !important;
+    height: 90px;
+}
+@media (min-width: 768px) {
+    .imagen{
+        width: 40%;
+        border-radius: 50% !important;
+        height: 90px;
+    }
+}

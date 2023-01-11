@@ -1,0 +1,50 @@
+<div class="container mt-3 pb-5">
+
+  <form [formGroup]="formAdmin" (ngSubmit)="onSubmit(formAdmin.value)" class="row g-3">
+
+    <div class="">
+      <img [src]="getUserImage()" alt="" class="rounded-circle image-profile">
+    </div>
+
+    <div class="">
+      <label for="emailAdmin" class="form-label">Email</label>
+      <input type="email" formControlName="email" class="form-control" id="emailAdmin">
+    </div>
+
+    <div class="">
+      <label for="usernameAdmin" class="form-label">Username</label>
+      <input type="text" formControlName="username" class="form-control" id="usernameAdmin" readonly>
+    </div>
+
+    <div class="">
+      <label for="nameAdmin" class="form-label">Nombre completo</label>
+      <input type="text" formControlName="name" class="form-control" id="nameAdmin" readonly>
+    </div>
+
+    <div class="">
+      <label for="avatarAdmin" class="form-label">Avatar</label>
+      <input class="form-control" [ngClass]="{'is-invalid': errorAvatar}" (input)="fileChoosen($event)"  type="file" id="avatarAdmin" aria-describedby="validationAvatar">
+      <div id="validationAvatar" class="invalid-feedback">
+        Solo archivos de tipo imágen (.jpg, .jpeg y .png).
+      </div>
+    </div>
+
+    <div class="form-check">
+      <input type="checkbox" formControlName="checkPassword" (change)="changeCheck()" class="form-check-input" id="checkPassword">
+      <label class="form-check-label" for="checkPassword">Cambiar contraseña</label>
+    </div>
+
+    <div class="">
+      <label for="passwordAdmin" class="form-label">Password</label>
+      <input type="password" formControlName="password" class="form-control is-invalid" [ngClass]="{'is-invalid': errorPassword}" id="passwordAdmin" aria-describedby="validationPassword">
+      <div id="validationPassword" class="invalid-feedback">
+        La contraseña debe contener al menos 6 carácteres.
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Actualizar</button>
+
+  </form>
+  
+</div>
+

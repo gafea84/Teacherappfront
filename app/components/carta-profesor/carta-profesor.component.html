@@ -1,0 +1,40 @@
+<div class="card text-center h-100">
+    
+    <img [src]="imagen" class="container rounded-circle mt-2 imagen"  [alt]="Profesor.nombreCompleto">
+    
+    <div class="card-body">
+        
+        <h5 class="card-title">{{Profesor.nombreCompleto}}</h5>
+        <p>{{Profesor.nombreRama}}</p>
+        <p>{{Profesor.telefono}}</p>
+        <p>{{Profesor.email}}</p>
+
+    </div>
+
+    <div class="card-footer">
+
+        <form [formGroup]="userForm_opinion" (ngSubmit)="getDataForm()">
+
+            <small class="text-muted">
+
+                <div class="form-group mt-3">
+                    <label for="comentario">Opinion</label>
+                    <textarea class="form-control" (change)="opinion_valida()" formControlName="comentario" id="comentario" rows="3" placeholder="¿Que te ha parecido tu profesor? Se sincero y educado"></textarea>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label for="puntuacion">Indica la puntuacion del profesor (0-10)</label>
+                    <input type="number" max="10" min="0" id="puntuacion" class="form-control" (change)="opinion_valida()" formControlName="puntuacion" placeholder="Introduce la puntacion">
+                </div>
+
+                <button class="btn btn-primary mt-3 ms-3 me-3 mb-3" [disabled]="!aceptado">{{comentar}}</button>
+            
+            </small>
+        
+        </form>
+    
+    </div>
+
+</div>
+
+<div></div>

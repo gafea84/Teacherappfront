@@ -1,0 +1,70 @@
+<div class="container mt-3">
+
+  <div class="row">
+    <div class="col-6">
+      <div class="form-group">
+        <div class="input-group">
+          <input class="form-control form-control-sm" id="buscarProfesores" [(ngModel)]="buscarProfesor" >
+          <div class="input-group-append">
+            <button class="btn btn-outline-primary btn-sm" type="button" (click)="buscarProfesores()">
+              Buscar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <nav aria-label="Navegación de profesores">
+        <ul class="pagination pagination-sm justify-content-end">
+          <li class="page-item" [ngClass]="{'disabled': paginaActual === 0}">
+            <a class="page-link" aria-label="Previous" (click)="cambiarPagina(paginaActual - 1)">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <ng-container *ngFor="let pagina of paginacion; index as i;">
+            <ng-container *ngIf="(i > (paginaActual - 3) && i < (paginaActual + 3)) || paginaActual < 3 && i < 5 || (paginaActual > ultimaPagina - 3) && i > ultimaPagina - 6">
+              <li class="page-item" [ngClass]="{'active': i === paginaActual}">
+                <a class="page-link" (click)="cambiarPagina(i)">{{ i + 1 }}</a>
+              </li>
+            </ng-container>
+          </ng-container>
+          <li class="page-item" [ngClass]="{'disabled': paginaActual === (ultimaPagina - 1)}">
+            <a class="page-link" aria-label="Next" (click)="cambiarPagina(paginaActual + 1)">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+
+
+  <table class="table table-striped table-sm align-middle">
+    <thead>
+      <tr class="table-primary">
+        <th scope="col">Nombre</th>
+        <th scope="col">Rama</th>
+        <th scope="col">&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let profesor of tablaProfesores">
+        <td>{{ profesor.nombreCompleto }}</td>
+        <td>{{ profesor.nombreRama }}</td>
+        <td>
+          <button *ngIf="profesor.validado === 0; else profesorValidado;" class="btn btn-sm btn-outline-success button-table" type="button" (click)="activarProfesor(profesor.id)">
+            <i class="fa-solid fa-check"></i>
+          </button>
+          <ng-template #profesorValidado>
+            <button class="btn btn-sm btn-outline-danger button-table" type="button" (click)="bloquearProfesor(profesor.id)">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </ng-template>
+          
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

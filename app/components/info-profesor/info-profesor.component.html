@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row pb-5" *ngIf="profesor">
+
+    <div class="d-flex flex-column col-12 col-md-6 col-lg-4">
+      <img class="img-profesor rounded rounded-circle p-3" [src]="getUserImage(profesor)" [alt]="profesor.nombreCompleto">
+      <button class="btn btn-primary mt-3" (click)="inscribirse()" [disabled]="btnInscribirseEnable">{{ btnInscribirseTxt }}</button>
+    </div>
+
+    <div class="d-flex flex-column justify-content-center col-12 col-md-6 col-lg-4 mt-3">
+      <h2>{{ profesor.nombreCompleto }}</h2>
+      <h5>{{ profesor.nombreRama }}</h5>
+      <span>{{ profesor.descripcion }}</span>
+    </div>
+
+    <div class="d-flex flex-column justify-content-center col-12 col-lg-4 mt-3">
+      <span>Precio/Hora: {{ profesor.precioHora | formatoMedidas: '€' }}</span>
+      <span>Teléfono: {{ profesor.telefono }}</span>
+      <span>Email: {{ profesor.email }}</span>
+    </div>
+
+    <div class="col-12 mt-3">
+      <agm-map [latitude]="profesor.latitud" [longitude]="profesor.longitud" [zoom]="8">
+        <agm-marker [latitude]="profesor.latitud" [longitude]="profesor.longitud" iconUrl="assets/ubicacion_rojo.png"></agm-marker>
+      </agm-map>
+    </div>
+
+    <div class="col-12 mt-5" *ngIf="opiniones.length > 0">
+      <h3>Opiniones</h3>      
+      <div class="d-flex flex-column col-12 mt-3" *ngFor="let opinion of opiniones">
+        <div>
+          <i class="fa-solid fa-star" *ngFor="let start of getStars(opinion.puntuacion, 'complete')"></i>
+          <i class="fa-solid fa-star-half-stroke" *ngFor="let start of getStars(opinion.puntuacion, 'half')"></i>
+          <i class="fa-regular fa-star" *ngFor="let start of getStars(opinion.puntuacion, 'empty')"></i>
+        </div>
+        <h5 class="fst-italic mb-0">{{ opinion.comentario }}</h5>
+        <span class="text-muted"><small>{{ opinion.fechaPuntuacion.substr(0, 10) }}</small></span>
+      </div>
+    </div>
+
+
+
+  </div>
+</div>

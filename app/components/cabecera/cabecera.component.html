@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark border-3 border-bottom border-danger shadow fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand close-collapse" routerLinkActive="active" [routerLink]="['/TeacherApp/buscador']">
+            <img src="./assets/images/Logo.png" class="logo">
+        </a>
+        <button #buttonCollapse class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div #navbarCollapse class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link close-collapse" routerLinkActive="active" [routerLink]="['/TeacherApp/buscador']">
+                        Buscar profesores
+                    </a>
+                </li>
+                <li class="nav-item" *ngIf="!token">
+                    <a class="nav-link close-collapse" routerLinkActive="active" [routerLink]="['/TeacherApp/crear_cuenta']">
+                        Crear cuenta
+                    </a>
+                </li>
+                <li class="nav-item" *ngIf="!token">
+                    <a class="nav-link close-collapse" routerLinkActive="active" [routerLink]="['/TeacherApp/iniciar_sesion']">
+                        Iniciar sesion
+                    </a>
+                </li>
+                <li class="nav-item dropdown" *ngIf="token">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      {{ email }}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li *ngFor="let option of menu">
+                            <a class="dropdown-item close-collapse" [routerLink]="[option.link]">
+                                {{ option.name }}
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item close-collapse" (click)="cerrarSesion()">
+                                Cerrar sesión
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,25 @@
+<section class="container-form mt-4">
+
+    <div>
+        
+        <select class="form-select" aria-label="Default select example" [(ngModel)]="opcion_alumno_profe">
+            <option disabled selected hidden>¿Eres profesor o alumno?</option>
+            <option value="Profesor">Profesor</option>
+            <option value="Alumno">Alumno</option>
+        </select>
+
+    </div>   
+     
+    <div *ngIf="opcion_profesor(); else elseBlock">
+    
+        <app-crear-profesor></app-crear-profesor>
+    
+    </div>
+    
+    <ng-template #elseBlock>
+    
+        <app-crear-alumno></app-crear-alumno>
+    
+    </ng-template>
+    
+</section>

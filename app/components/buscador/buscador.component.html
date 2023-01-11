@@ -1,0 +1,82 @@
+<div class="container">
+  
+  <h1 class="text-center mt-3">Encuentra a tu profesor</h1>
+
+  <div class="accordion" id="accordionBuscador">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingAccordion">
+        <button #searchButton class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Buscador
+        </button>
+      </h2>
+      <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingAccordion" data-bs-parent="#accordionSearch" >
+        <div class="accordion-body">
+
+          <div class="row">
+
+            <div class="p-1 col-12 col-lg-4">
+              <div class="form-group">
+                <label for="seleccion-rama"><strong>Rama:</strong></label>
+                <select class="form-control" id="seleccion-rama" [(ngModel)]="ramaSeleccionada">
+                  <option value="0">-Selecciona una rama-</option>
+                  <option *ngFor="let rama of ramas" [value]="rama.id">{{ rama.nombre }}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="p-1 col-12 col-lg-4">
+              <div class="form-group">
+                <label><strong>Localización: </strong><small>{{ latitude }} {{ longitude }}</small></label>
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Buscar en localización" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-primary" type="button" (click)="obtenerUbicacion()">
+                      <i class="fa-solid fa-location-crosshairs"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-1 col-12 col-lg-4">
+              <div class="form-group">
+                <label for="filtro-distancia" class="form-label">
+                  <strong>Distancia máxima: </strong>
+                  <small>{{ distanciaSeleccionada }} Kms</small></label>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="distancia-sin-limite" [checked]="limiteDistancia" (change)="limiteDistancia = !limiteDistancia">
+                  <label class="form-check-label" for="distancia-sin-limite">
+                    <small>Sin límite de distancia</small>
+                  </label>
+                </div>
+                <input type="range" class="form-range" id="filtro-distancia" min="1" max="500" [(ngModel)]="distanciaSeleccionada">
+              </div>
+            </div>
+ 
+            <div class="p-1 col-12 mt-2">
+              <div class="form-group text-center">
+                <button class="btn btn-primary" (click)="buscarProfesores()">Buscar profesor</button>
+              </div>
+            </div>
+            
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="mostrarResultados">
+
+    <div class="d-flex justify-content-center">
+      <div class="btn-group mt-3" role="group" aria-label="mostrar">
+        <button type="button" class="btn btn-primary" (click)="mostrarMapa = false">Listado</button>
+        <button type="button" class="btn btn-primary" (click)="mostrarMapa = true">Mapa</button>
+      </div>
+    </div>
+
+    <app-listado-profesores *ngIf="!mostrarMapa" [profesores]="profesores"></app-listado-profesores>
+    <app-mapa-profesores *ngIf="mostrarMapa" [profesores]="profesores" [lat]="latitude" [lon]="longitude"></app-mapa-profesores>  
+  </div>
+
+</div>
